@@ -50,7 +50,89 @@
 
 
 .ai-notice{font-size:12px;margin:12px 2px;padding:11px 13px;border-radius:12px;background:#f1f4e9;color:#516046;line-height:1.4}.ai-notice.error{background:#fff1e8;color:#894a32}.formchat button:disabled{opacity:.5}.chatlog .msg.typing{font-style:italic;color:#7f867c}
-</style></head><body><div class="app"><header class="header"><div class="brand"><span>✳</span>little beings.</div><div class="badge">CREATURE LAB · V5.0</div></header>
+</style>
+<style>
+/* LITTLE BEINGS V5.1 — MOBILE FIX */
+
+/* Keep the whole creature visible */
+.being-mount {
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 0;
+  min-height: 0;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  overflow: hidden;
+}
+
+.being-mount svg.being {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+}
+
+/* Improve creature display on phones */
+@media (max-width: 800px) {
+  .portrait {
+    height: 370px;
+  }
+
+  .stage {
+    height: 370px;
+  }
+
+  .name-layout,
+  .game {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 420px) {
+  .portrait {
+    height: 380px;
+  }
+
+  .stage {
+    height: 360px;
+  }
+
+  .being-mount {
+    padding: 20px;
+  }
+}
+
+/* Wave with arms, not dragon wings */
+.being.mood-wave .arm-right {
+  animation: hand-wave .4s ease-in-out
+    infinite alternate;
+}
+
+.being.mood-wave .wing-right {
+  animation: wing-breathe 3.2s ease-in-out
+    infinite !important;
+}
+
+/* Natural dragon greeting */
+.being.being-ember.mood-wave,
+.being.being-nocty.mood-wave {
+  animation: dragon-greet .6s ease-in-out 2;
+}
+
+@keyframes dragon-greet {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-7px);
+  }
+}
+</style>
+</head><body><div class="app"><header class="header"><div class="brand"><span>✳</span>little beings.</div><div class="badge">CREATURE LAB · V5.0</div></header>
 <main>
 <section class="view active" id="choose"><div class="eyebrow">a strange little friendship begins</div><h1 class="title">Pick your<br>little weirdo.</h1><p class="subtitle">Four tiny personalities. One big friendship. Tap a creature to see who you're bringing home.</p><div class="grid" id="creatureGrid"></div><p class="pill">✦ Every creature has its own voice, moods &amp; memories.</p><div style="margin-top:18px"><button type="button" class="secondary" id="freshStart">↻ Start a new game</button></div></section>
 <section class="view" id="introduce"><div class="eyebrow" id="introEyebrow">your first hello</div><div class="name-layout"><div class="portrait"><div id="introImage" class="being-mount" style="height:100%;width:100%;display:grid;place-items:center"></div><div class="float-emoji" id="introEmoji">👋</div></div><div><h1 class="title" id="introTitle">It's you!</h1><div class="speech" id="introSpeech" aria-live="polite"></div><form id="nameForm"><label class="eyebrow" for="ownerInput">what should your new friend call you?</label><input class="field" id="ownerInput" maxlength="26" placeholder="Your name" autocomplete="given-name" required><button class="primary" type="submit">We're friends now →</button></form><button class="back" id="backChoose" type="button">← Choose someone else</button></div></div></section>
